@@ -300,6 +300,7 @@
 				4BD78F441DAC9CFD00D6D873 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
