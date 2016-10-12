@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,7 +49,7 @@
                         <outlet property="navigationBar" destination="IPa-SW-E8P" id="hvw-I0-UXo"/>
                         <outlet property="tableView" destination="RLl-0n-wgC" id="AxN-Qk-Lh3"/>
                         <segue destination="lNJ-tg-V8u" kind="show" identifier="goToAbout" id="QV4-5u-Un3"/>
-                        <segue destination="Ss3-V2-xTY" kind="show" identifier="addNewTask" id="Tzb-7V-VmC"/>
+                        <segue destination="Ss3-V2-xTY" kind="show" identifier="AddNewTask" id="Tzb-7V-VmC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -66,12 +67,48 @@
                     <view key="view" contentMode="scaleToFill" id="EQi-If-dsb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ5-m2-OWc">
+                                <color key="backgroundColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="gCE-ev-w7E"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="20"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="1" green="0.03014565537" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitBtnPressed:" destination="Ss3-V2-xTY" eventType="touchUpInside" id="NVC-qt-Shl"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7rR-m1-LAB">
+                                <color key="backgroundColor" red="0.97784548997879028" green="0.91731125116348267" blue="0.92498582601547241" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="foF-3g-URw"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jQO-wi-6zk" firstAttribute="top" secondItem="oZ5-m2-OWc" secondAttribute="bottom" constant="20" id="06w-ag-zJu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oZ5-m2-OWc" secondAttribute="trailing" constant="117" id="3wz-hF-Ehj"/>
+                            <constraint firstItem="oZ5-m2-OWc" firstAttribute="leading" secondItem="EQi-If-dsb" secondAttribute="leadingMargin" constant="116" id="Al1-bb-iDz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="7rR-m1-LAB" secondAttribute="trailing" constant="80" id="jcp-SS-E2y"/>
+                            <constraint firstItem="7rR-m1-LAB" firstAttribute="leading" secondItem="EQi-If-dsb" secondAttribute="leadingMargin" constant="80" id="uVB-v0-aJe"/>
+                            <constraint firstItem="7rR-m1-LAB" firstAttribute="top" secondItem="m8B-C5-Plz" secondAttribute="bottom" constant="245" id="ug8-Qw-8AY"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="inputTextField" destination="7rR-m1-LAB" id="fjU-UY-Ui9"/>
+                        <outlet property="submitBtn" destination="oZ5-m2-OWc" id="K1K-o6-T3s"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yrq-p0-EUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="691"/>
+            <point key="canvasLocation" x="1509.5999999999999" y="690.40479760119945"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="bC3-M4-SJb">
