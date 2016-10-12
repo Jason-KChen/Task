@@ -16,12 +16,12 @@ class addNewTaskViewController: UIViewController {
 
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var navigationbar: UINavigationItem!
     
     var delegate: TaskConfigurationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func submitBtnPressed(_ sender: UIButton) {
@@ -34,6 +34,9 @@ class addNewTaskViewController: UIViewController {
         }
     }
 
+    @IBAction func CancelPressed(_ sender: AnyObject) {
+        dismiss(animated: true, completion: nil)
+    }
     
     
 }

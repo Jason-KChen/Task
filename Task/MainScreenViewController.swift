@@ -17,14 +17,11 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        setupNavigationBar()
+        setupNavigationBarBtns()
     }
     
     //add title, left button and right button for navigation bar
-    func setupNavigationBar() {
-        
-        navigationBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
-        tableView.frame = CGRect(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height - 60)
+    func setupNavigationBarBtns() {
         
         let navItems = UINavigationItem(title: "My Tasks")
         navItems.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(goToAddANewTaskPage)), animated: false)
