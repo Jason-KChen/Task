@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B94B4DD1DAD81D80035BCE8 /* addNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94B4DC1DAD81D80035BCE8 /* addNewTaskViewController.swift */; };
 		4BD78F341DAC9CFD00D6D873 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD78F331DAC9CFD00D6D873 /* AppDelegate.swift */; };
 		4BD78F391DAC9CFD00D6D873 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BD78F371DAC9CFD00D6D873 /* Main.storyboard */; };
 		4BD78F3B1DAC9CFD00D6D873 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4BD78F3A1DAC9CFD00D6D873 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B94B4DC1DAD81D80035BCE8 /* addNewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addNewTaskViewController.swift; sourceTree = "<group>"; };
 		4BD78F301DAC9CFD00D6D873 /* Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Task.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD78F331DAC9CFD00D6D873 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BD78F381DAC9CFD00D6D873 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				4BD78F491DACA10D00D6D873 /* MainScreenViewController.swift */,
+				4B94B4DC1DAD81D80035BCE8 /* addNewTaskViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B94B4DD1DAD81D80035BCE8 /* addNewTaskViewController.swift in Sources */,
 				4BD78F341DAC9CFD00D6D873 /* AppDelegate.swift in Sources */,
 				4BD78F4A1DACA10D00D6D873 /* MainScreenViewController.swift in Sources */,
 			);

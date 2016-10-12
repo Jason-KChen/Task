@@ -10,22 +10,30 @@ import UIKit
 
 class MainScreenViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         setupNavigationBar()
-        // Do any additional setup after loading the view.
     }
     
     //add title, left button and right button for navigation bar
     func setupNavigationBar() {
-        navigationItem.title = "My Tasks"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
         
-        let infoBtn = UIButton(type: .infoLight)
+        navigationBar.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 60)
+        tableView.frame = CGRect(x: 0, y: 60, width: self.view.frame.width, height: self.view.frame.height - 60)
+        
+        let navItems = UINavigationItem(title: "My Tasks")
+        navItems.setRightBarButton(UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil), animated: false)
+        
+        let infoBtn = UIButton(type: .infoDark)
         infoBtn.addTarget(self, action: #selector(goToAboutPage), for: .touchUpInside)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: infoBtn)
+        navItems.leftBarButtonItem = UIBarButtonItem(customView: infoBtn)
+        
+        navigationBar.setItems([navItems], animated: false)
     }
     
     //perform segue to about page
@@ -34,11 +42,18 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
+        
+        if indexPath.row == 0 {
+            dequeued.textLabel?.text = "Hello World"
+        }
+        if indexPath.row == 1 {
+            dequeued.textLabel?.text = "Goodbye World"
+        }
         return dequeued
     }
 }
