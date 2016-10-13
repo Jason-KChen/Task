@@ -12,22 +12,25 @@ protocol TaskConfigurationDelegate {
     func userDidSetNewTask(input: String)
 }
 
-class addNewTaskViewController: UIViewController {
+class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var submitBtn: UIButton!
-    @IBOutlet weak var navigationbar: UINavigationItem!
+    @IBOutlet weak var additionalDetails: UITextView!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     var delegate: TaskConfigurationDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        inputTextField.delegate = self
+        additionalDetails.delegate = self
+        datePicker.backgroundColor = UIColor.red
     }
     
     @IBAction func submitBtnPressed(_ sender: UIButton) {
         if delegate != nil && inputTextField.text != nil && inputTextField.text != "" {
             if let data = inputTextField.text {
-                print(inputTextField.text)
                 delegate?.userDidSetNewTask(input: data)
                 dismiss(animated: true, completion: nil)
             }
@@ -36,6 +39,11 @@ class addNewTaskViewController: UIViewController {
 
     @IBAction func CancelPressed(_ sender: AnyObject) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        inputTextField.resignFirstResponder()
+        return false
     }
     
     

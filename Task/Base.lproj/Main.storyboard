@@ -134,8 +134,8 @@
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                         <state key="normal" title="Set Reminder Frequency"/>
                                     </button>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="QhP-Mt-RcK">
-                                        <color key="backgroundColor" white="0.79193652498311007" alpha="0.32358156028368795" colorSpace="calibratedWhite"/>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="QhP-Mt-RcK">
+                                        <color key="backgroundColor" red="0.49733164110732953" green="0.49733164110732953" blue="0.49733164110732953" alpha="0.49501329787234044" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="KGF-xd-d7w"/>
                                         </constraints>
@@ -157,7 +157,7 @@
                                             <constraint firstAttribute="height" constant="65" id="Kb0-45-dnW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
-                                        <state key="normal" title="Finish"/>
+                                        <state key="normal" title="😀 Finish 😀"/>
                                         <connections>
                                             <action selector="submitBtnPressed:" destination="Ss3-V2-xTY" eventType="touchUpInside" id="NVC-qt-Shl"/>
                                         </connections>
@@ -167,6 +167,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="qvb-zM-3m4"/>
                                         </constraints>
+                                        <color key="textColor" red="0.0" green="0.7412648167" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -175,7 +176,6 @@
                                 <constraints>
                                     <constraint firstItem="vci-RX-1C9" firstAttribute="leading" secondItem="vxe-TN-Tsc" secondAttribute="leadingMargin" id="0yh-y9-C5N"/>
                                     <constraint firstItem="VsD-H6-toc" firstAttribute="top" secondItem="QhP-Mt-RcK" secondAttribute="bottom" constant="25" id="2Mp-Ci-zVo"/>
-                                    <constraint firstAttribute="height" constant="740" id="4dk-4K-64f"/>
                                     <constraint firstItem="oZ5-m2-OWc" firstAttribute="top" secondItem="IfA-1Y-hQ8" secondAttribute="bottom" constant="25" id="91t-MZ-Nf6"/>
                                     <constraint firstItem="QhP-Mt-RcK" firstAttribute="trailing" secondItem="vxe-TN-Tsc" secondAttribute="trailingMargin" id="Aye-IE-a3b"/>
                                     <constraint firstItem="7rR-m1-LAB" firstAttribute="trailing" secondItem="vxe-TN-Tsc" secondAttribute="trailingMargin" id="Hde-AA-4Ob"/>
@@ -220,6 +220,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="800"/>
                     <connections>
+                        <outlet property="additionalDetails" destination="YPQ-R2-iOd" id="mm8-n2-Hqs"/>
+                        <outlet property="datePicker" destination="QhP-Mt-RcK" id="s93-a2-1c9"/>
                         <outlet property="inputTextField" destination="7rR-m1-LAB" id="fjU-UY-Ui9"/>
                         <outlet property="submitBtn" destination="oZ5-m2-OWc" id="K1K-o6-T3s"/>
                     </connections>
