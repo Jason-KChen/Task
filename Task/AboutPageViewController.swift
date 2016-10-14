@@ -10,13 +10,21 @@ import UIKit
 
 class AboutPageViewController: UIViewController {
 
+    @IBOutlet weak var testButton: UIButton!
+    var longPressRecognizer: UILongPressGestureRecognizer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPressDetected))
+        testButton.addGestureRecognizer(longPressRecognizer!)
     }
     
     @IBAction func BackBtnPressed(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func longPressDetected(sender: UILongPressGestureRecognizer?) {
+        print("long press recognizer")
     }
 
 }

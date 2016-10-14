@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lfz-21-JZz" id="qZ2-MD-UHg">
-                                            <frame key="frameInset" width="375" height="43"/>
+                                            <frame key="frameInset" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -94,15 +94,15 @@
                             </navigationBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vxe-TN-Tsc">
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0d-g6-sY0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="p0d-g6-sY0">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="QLB-aC-oaq"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="20"/>
                                         <color key="textColor" red="0.30386095773077826" green="0.37254506387861841" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Give it a short Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7rR-m1-LAB">
+                                    <textField opaque="NO" clipsSubviews="YES" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Give it a short Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7rR-m1-LAB">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="Ale-v5-aUM"/>
                                         </constraints>
@@ -110,32 +110,34 @@
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some more details?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qx5-dX-uQj">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some more details?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="Qx5-dX-uQj">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="ce5-ul-oVr"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="20"/>
                                         <color key="textColor" red="0.30386095769999999" green="0.37254506389999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick A Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vci-RX-1C9">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick A Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="vci-RX-1C9">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="uBF-pP-2wn"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
+                                        <fontDescription key="fontDescription" name="Menlo-Bold" family="Menlo" pointSize="20"/>
                                         <color key="textColor" red="0.30386095769999999" green="0.37254506389999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfA-1Y-hQ8">
+                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IfA-1Y-hQ8" customClass="newTaskPageButtons" customModule="Task" customModuleProvider="target">
                                         <color key="backgroundColor" red="0.0" green="0.7412648167" blue="1" alpha="0.32358156030000002" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="XVv-ie-d60"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
-                                        <state key="normal" title="Set Reminder Frequency"/>
+                                        <state key="normal" title="Set Reminder Frequency">
+                                            <color key="titleColor" red="0.039215686270000001" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="QhP-Mt-RcK">
-                                        <color key="backgroundColor" red="0.49733164110732953" green="0.49733164110732953" blue="0.49733164110732953" alpha="0.49501329787234044" colorSpace="calibratedRGB"/>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="QhP-Mt-RcK" customClass="roundCornerDatePicker" customModule="Task" customModuleProvider="target">
+                                        <color key="backgroundColor" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="0.33327047413793104" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="KGF-xd-d7w"/>
                                         </constraints>
@@ -143,31 +145,33 @@
                                             <!--2016-10-12 19:04:54 +0000-->
                                         </date>
                                     </datePicker>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VsD-H6-toc">
+                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VsD-H6-toc" customClass="newTaskPageButtons" customModule="Task" customModuleProvider="target">
                                         <color key="backgroundColor" red="0.0" green="0.7412648167" blue="1" alpha="0.32358156030000002" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="jfe-h0-nqc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
-                                        <state key="normal" title="Select Type of Task"/>
+                                        <state key="normal" title="Select Type of Task">
+                                            <color key="titleColor" red="0.039215686270000001" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ5-m2-OWc">
+                                    <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ5-m2-OWc" customClass="newTaskPageButtons" customModule="Task" customModuleProvider="target">
                                         <color key="backgroundColor" red="0.0" green="0.7412648167" blue="1" alpha="0.32358156028368795" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="65" id="Kb0-45-dnW"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
-                                        <state key="normal" title="😀 Finish 😀"/>
-                                        <connections>
-                                            <action selector="submitBtnPressed:" destination="Ss3-V2-xTY" eventType="touchUpInside" id="NVC-qt-Shl"/>
-                                        </connections>
+                                        <state key="normal" title="😀 Finish 😀">
+                                            <color key="titleColor" red="0.039215686274509803" green="0.37647058823529411" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
                                     </button>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" text="Optional" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YPQ-R2-iOd">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="scaleToFill" indicatorStyle="black" text="Optional" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YPQ-R2-iOd" customClass="RoundTextView" customModule="Task" customModuleProvider="target">
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="qvb-zM-3m4"/>
                                         </constraints>
-                                        <color key="textColor" red="0.0" green="0.7412648167" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -223,7 +227,12 @@
                         <outlet property="additionalDetails" destination="YPQ-R2-iOd" id="mm8-n2-Hqs"/>
                         <outlet property="datePicker" destination="QhP-Mt-RcK" id="s93-a2-1c9"/>
                         <outlet property="inputTextField" destination="7rR-m1-LAB" id="fjU-UY-Ui9"/>
+                        <outlet property="pickADateLabel" destination="vci-RX-1C9" id="Y6o-D4-l0r"/>
+                        <outlet property="reminderFrequencyBtn" destination="IfA-1Y-hQ8" id="S6r-HS-Zxq"/>
                         <outlet property="submitBtn" destination="oZ5-m2-OWc" id="K1K-o6-T3s"/>
+                        <outlet property="taskDetailsLabel" destination="Qx5-dX-uQj" id="2VV-4o-4z2"/>
+                        <outlet property="taskNameLabel" destination="p0d-g6-sY0" id="4E4-Je-nrJ"/>
+                        <outlet property="taskTypeBtn" destination="VsD-H6-toc" id="Nuy-h6-IXP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yrq-p0-EUB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -256,6 +265,13 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TMl-3r-Qgp">
+                                <frame key="frameInset" minX="147" minY="128" width="70" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" red="0.32602768459999998" green="0.7412648167" blue="1" alpha="0.70158943969999998" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -264,10 +280,13 @@
                             <constraint firstItem="eM9-OL-reh" firstAttribute="top" secondItem="Zk1-Yg-ROi" secondAttribute="top" id="vyR-6t-4El"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="testButton" destination="TMl-3r-Qgp" id="Zmw-lf-1M1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TcY-MD-rJw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="830" y="1367"/>
+            <point key="canvasLocation" x="829.60000000000002" y="1366.8665667166417"/>
         </scene>
     </scenes>
 </document>
