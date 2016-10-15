@@ -147,6 +147,7 @@
                                     </datePicker>
                                     <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VsD-H6-toc" customClass="newTaskPageButtons" customModule="Task" customModuleProvider="target">
                                         <color key="backgroundColor" red="0.0" green="0.7412648167" blue="1" alpha="0.32358156030000002" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="jfe-h0-nqc"/>
                                         </constraints>

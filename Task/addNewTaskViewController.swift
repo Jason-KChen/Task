@@ -25,12 +25,18 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var delegate: TaskConfigurationDelegate?
+    var longPressRecognizerForTaskType: UILongPressGestureRecognizer!
+    var longPressRecognizerForReminderFrequency: UILongPressGestureRecognizer!
+    var tapRecognizerForSubmitBtn: UITapGestureRecognizer!
+    var actionSheetForTaskType: UIAlertController?
+    var actionSheetForReminderFrequency: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         inputTextField.delegate = self
         additionalDetails.delegate = self
         modifySomeUISettings()
+        applyGestureRecognizers()
     }
     
     @IBAction func submitBtnPressed(_ sender: UIButton) {
@@ -89,7 +95,66 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         submitBtn.titleLabel?.minimumScaleFactor = 0.75
         
     }
-    //@IBAction func selectTaskTypeHolded
     
+    //set up gesture recognizers
+    func applyGestureRecognizers() {
+        
+        longPressRecognizerForTaskType = UILongPressGestureRecognizer(target: self, action: #selector(taskTypeBtnGestureHandler(sender:)))
+        longPressRecognizerForReminderFrequency = UILongPressGestureRecognizer(target: self, action: #selector(reminderFrequencyBtnGestureHandler(sender:)))
+        tapRecognizerForSubmitBtn = UITapGestureRecognizer(target: self, action: #selector(submitBtnGestureHandler(sender:)))
+        taskTypeBtn.addGestureRecognizer(longPressRecognizerForTaskType)
+        reminderFrequencyBtn.addGestureRecognizer(longPressRecognizerForReminderFrequency)
+        submitBtn.addGestureRecognizer(tapRecognizerForSubmitBtn)
+        
+    }
+    
+    //Gesture Handler for task type btn
+    func taskTypeBtnGestureHandler(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == .began {
+            actionSheetForTaskType = UIAlertController(title: nil, message: "Select the type", preferredStyle: .actionSheet)
+            actionSheetForTaskType?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            actionSheetForTaskType?.addAction(UIAlertAction(title: "Work", style: .default, handler: taskTypeActionSheetHandler(alertAction: )))
+            actionSheetForTaskType?.addAction(UIAlertAction(title: "Life", style: .default, handler: taskTypeActionSheetHandler(alertAction: )))
+            actionSheetForTaskType?.addAction(UIAlertAction(title: "School", style: .default, handler: taskTypeActionSheetHandler(alertAction: )))
+            actionSheetForTaskType?.addAction(UIAlertAction(title: "Whatever", style: .default, handler: taskTypeActionSheetHandler(alertAction: )))
+            
+            present(actionSheetForTaskType!, animated: true, completion: nil)
+        }
+    }
+    
+    //Task Type Action Sheet Selection Handler
+    func taskTypeActionSheetHandler(alertAction: UIAlertAction) {
+        if let selectedOption = alertAction.title {
+            taskTypeBtn.setTitle(selectedOption, for: .normal)
+        }
+    }
+    
+    //Gesture Handler for reminder frequency button
+    func reminderFrequencyBtnGestureHandler(sender: UILongPressGestureRecognizer) {
+        
+        if sender.state == .began {
+            actionSheetForReminderFrequency = UIAlertController(title: nil, message: "Choose a frequency", preferredStyle: .actionSheet)
+            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Twice A Day", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
+            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Everyday", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
+            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Every Three Days", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
+            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Every Week", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
+            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "No Reminder", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
+            
+            present(actionSheetForReminderFrequency!, animated: true, completion: nil)
+        }
+    }
+    
+    //Reminder Frequency action sheet selection handler
+    func reminderFrequencyActionSheetHandler(alertAction: UIAlertAction) {
+        if let selectedFrequency = alertAction.title {
+            reminderFrequencyBtn.setTitle(selectedFrequency, for: .normal)
+        }
+    }
+    
+    func submitBtnGestureHandler(sender: UITapGestureRecognizer) {
+        
+    }
     
 }
