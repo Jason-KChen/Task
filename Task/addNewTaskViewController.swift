@@ -36,6 +36,7 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     var newTaskDueDate: [Int]?
     var newTaskType: String?
     var newTaskReminderFrequency: String?
+    var defaultDate: String?
     
     
     override func viewDidLoad() {
@@ -212,6 +213,11 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
             inputStatus = false
         }
         
+        //verify selectedDate
+        if newTaskDueDate == nil {
+            inputStatus = false
+        }
+        
         return inputStatus
     }
     
@@ -224,22 +230,34 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         datePicker.maximumDate = NSDate(timeIntervalSinceNow: 31556926 * 3) as Date
         datePicker.addTarget(self, action: #selector(parseDate), for: .valueChanged)
         
+        //provide a default time for new task
+        defaultDate = datePicker.date.description
+        parseDate()
+        
     }
     
     //Parse the date selected by the user
-//    func parseDate() {
-//        
-//        let unparsedDate = datePicker.date.description
-//        let parsedYear: Int?
-//        let parsedMonth: Int?
-//        let parsedDay: Int?
-//        
-//        do {
-//            parsedYear = unparsedDate.substring(to: 4)
-//        } catch {
-//            print(error)
-//        }
-//        
-//    }
-    
+    func parseDate() {
+        
+        let unparsedDate: String!
+        if defaultDate != nil {
+            unparsedDate = defaultDate
+            defaultDate = nil
+        } else {
+            unparsedDate = datePicker.date.description
+        }
+
+        let range1 = unparsedDate.index(unparsedDate.startIndex, offsetBy: 0)...unparsedDate.index(unparsedDate.startIndex, offsetBy: 3)
+        let range2 = unparsedDate.index(unparsedDate.startIndex, offsetBy: 5)...unparsedDate.index(unparsedDate.startIndex, offsetBy: 6)
+        let range3 = unparsedDate.index(unparsedDate.startIndex, offsetBy: 8)...unparsedDate.index(unparsedDate.startIndex, offsetBy: 9)
+            
+        if let parsedYear = Int(unparsedDate[range1]), let parsedMonth = Int(unparsedDate[range2]), let parsedDay = Int(unparsedDate[range3]) {
+            print(parsedYear)
+            print(parsedMonth)
+            print(parsedDay)
+            newTaskDueDate = [parsedYear, parsedMonth, parsedDay]
+        } else {
+            newTaskDueDate = nil
+        }
+    }
 }
