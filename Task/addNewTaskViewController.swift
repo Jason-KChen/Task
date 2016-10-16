@@ -31,32 +31,49 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     var actionSheetForTaskType: UIAlertController?
     var actionSheetForReminderFrequency: UIAlertController?
     
+    var newTaskName: String?
+    var newTaskDescription: String?
+    var newTaskDueDate: [Int]?
+    var newTaskType: String?
+    var newTaskReminderFrequency: String?
+    
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         inputTextField.delegate = self
         additionalDetails.delegate = self
         modifySomeUISettings()
         applyGestureRecognizers()
+        configureDatePicker()
+        
+        
     }
     
     @IBAction func submitBtnPressed(_ sender: UIButton) {
+        
         if delegate != nil && inputTextField.text != nil && inputTextField.text != "" {
             if let data = inputTextField.text {
                 delegate?.userDidSetNewTask(input: data)
                 dismiss(animated: true, completion: nil)
             }
         }
+        
     }
 
     //Dismiss current viewController when Cancel Navigation Bar Button is pressed
     @IBAction func CancelPressed(_ sender: AnyObject) {
+        
         dismiss(animated: true, completion: nil)
+        
     }
     
     //Dismiss textField keyboard when return is pressed
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         inputTextField.resignFirstResponder()
         return false
+        
     }
     
     //Replace existing text in textView with empty upon editing
@@ -73,6 +90,9 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if text == "\n" {
+            if let taskDescription = textView.text {
+                newTaskDescription = taskDescription
+            }
             textView.endEditing(true)
             return false
         }
@@ -125,9 +145,12 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     //Task Type Action Sheet Selection Handler
     func taskTypeActionSheetHandler(alertAction: UIAlertAction) {
+        
         if let selectedOption = alertAction.title {
+            newTaskType = selectedOption
             taskTypeBtn.setTitle(selectedOption, for: .normal)
         }
+        
     }
     
     //Gesture Handler for reminder frequency button
@@ -136,7 +159,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         if sender.state == .began {
             actionSheetForReminderFrequency = UIAlertController(title: nil, message: "Choose a frequency", preferredStyle: .actionSheet)
             actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Twice A Day", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
             actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Everyday", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
             actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Every Three Days", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
             actionSheetForReminderFrequency?.addAction(UIAlertAction(title: "Every Week", style: .default, handler: reminderFrequencyActionSheetHandler(alertAction: )))
@@ -148,13 +170,76 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     
     //Reminder Frequency action sheet selection handler
     func reminderFrequencyActionSheetHandler(alertAction: UIAlertAction) {
+        
         if let selectedFrequency = alertAction.title {
+            newTaskReminderFrequency = selectedFrequency
             reminderFrequencyBtn.setTitle(selectedFrequency, for: .normal)
         }
-    }
-    
-    func submitBtnGestureHandler(sender: UITapGestureRecognizer) {
         
     }
+    
+    //Gesture Handler for submit button
+    func submitBtnGestureHandler(sender: UITapGestureRecognizer) {
+        
+        print(validateNewTaskInputs())
+        //print(additionalDetails.text)
+    }
+    
+    //validate all input for the new task
+    func validateNewTaskInputs() -> Bool {
+        
+        var inputStatus = true
+        
+        //verify the name of the new task
+        if let taskName = inputTextField.text {
+            if taskName.characters.count > 0 {
+                newTaskName = taskName
+            } else {
+                inputStatus = false
+            }
+        }
+        
+        //verify additional details regarding the task
+        if let taskDetails = additionalDetails.text {
+            if taskDetails.characters.count > 0 {
+                newTaskDescription = taskDetails
+            }
+        }
+        
+        //verify type and frequency selection
+        if newTaskType == nil || newTaskReminderFrequency == nil {
+            print("either type or frequency is not set")
+            inputStatus = false
+        }
+        
+        return inputStatus
+    }
+    
+    //initial date picker configuration
+    func configureDatePicker() {
+        
+        datePicker.datePickerMode = .date
+        datePicker.setDate(Date(timeIntervalSinceNow: 10), animated: false)
+        datePicker.minimumDate = NSDate(timeIntervalSinceNow: 0) as Date
+        datePicker.maximumDate = NSDate(timeIntervalSinceNow: 31556926 * 3) as Date
+        datePicker.addTarget(self, action: #selector(parseDate), for: .valueChanged)
+        
+    }
+    
+    //Parse the date selected by the user
+//    func parseDate() {
+//        
+//        let unparsedDate = datePicker.date.description
+//        let parsedYear: Int?
+//        let parsedMonth: Int?
+//        let parsedDay: Int?
+//        
+//        do {
+//            parsedYear = unparsedDate.substring(to: 4)
+//        } catch {
+//            print(error)
+//        }
+//        
+//    }
     
 }

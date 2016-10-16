@@ -132,7 +132,7 @@
                                             <constraint firstAttribute="height" constant="60" id="XVv-ie-d60"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
-                                        <state key="normal" title="Set Reminder Frequency">
+                                        <state key="normal" title="Hold to Set Reminder">
                                             <color key="titleColor" red="0.039215686270000001" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
@@ -152,7 +152,7 @@
                                             <constraint firstAttribute="height" constant="60" id="jfe-h0-nqc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="20"/>
-                                        <state key="normal" title="Select Type of Task">
+                                        <state key="normal" title="Hold to Select Type">
                                             <color key="titleColor" red="0.039215686270000001" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
