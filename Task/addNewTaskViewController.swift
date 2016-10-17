@@ -37,6 +37,7 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     var newTaskType: String?
     var newTaskReminderFrequency: String?
     var defaultDate: String?
+    var errorCodeArray: [Int] = []
     
     
     override func viewDidLoad() {
@@ -47,7 +48,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         modifySomeUISettings()
         applyGestureRecognizers()
         configureDatePicker()
-        
         
     }
     
@@ -182,22 +182,24 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     //Gesture Handler for submit button
     func submitBtnGestureHandler(sender: UITapGestureRecognizer) {
         
-        print(validateNewTaskInputs())
-        //print(additionalDetails.text)
+        if(validateNewTaskInputs()) {
+            let newTask = CustomTask(newTaskName: newTaskName!, newTaskDetails: newTaskDescription, newTaskType: newTaskType!, newTaskReminderFrequency: newTaskReminderFrequency!, newTaskDueDate: newTaskDueDate!)
+            
+        }
     }
     
     //validate all input for the new task
     func validateNewTaskInputs() -> Bool {
-        
-        var inputStatus = true
         
         //verify the name of the new task
         if let taskName = inputTextField.text {
             if taskName.characters.count > 0 {
                 newTaskName = taskName
             } else {
-                inputStatus = false
+                errorCodeArray.append(1)
             }
+        } else {
+            errorCodeArray.append(1)
         }
         
         //verify additional details regarding the task
@@ -207,18 +209,27 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
             }
         }
         
-        //verify type and frequency selection
-        if newTaskType == nil || newTaskReminderFrequency == nil {
-            print("either type or frequency is not set")
-            inputStatus = false
+        //check if the type of the new task is set
+        if newTaskType == nil {
+            errorCodeArray.append(2)
+        }
+        
+        //check if frequency is set
+        if newTaskReminderFrequency == nil {
+            errorCodeArray.append(3)
         }
         
         //verify selectedDate
         if newTaskDueDate == nil {
-            inputStatus = false
+            errorCodeArray.append(4)
         }
         
-        return inputStatus
+        if errorCodeArray.count == 0 {
+            return true
+        } else {
+            dialogBoxForInvalidInput()
+            return false
+        }
     }
     
     //initial date picker configuration
@@ -233,7 +244,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         //provide a default time for new task
         defaultDate = datePicker.date.description
         parseDate()
-        
     }
     
     //Parse the date selected by the user
@@ -252,12 +262,27 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         let range3 = unparsedDate.index(unparsedDate.startIndex, offsetBy: 8)...unparsedDate.index(unparsedDate.startIndex, offsetBy: 9)
             
         if let parsedYear = Int(unparsedDate[range1]), let parsedMonth = Int(unparsedDate[range2]), let parsedDay = Int(unparsedDate[range3]) {
-            print(parsedYear)
-            print(parsedMonth)
-            print(parsedDay)
             newTaskDueDate = [parsedYear, parsedMonth, parsedDay]
         } else {
             newTaskDueDate = nil
         }
     }
+    
+    //Dialog box for invalidate input
+    func dialogBoxForInvalidInput() {
+        
+        if errorCodeArray.count != 0 {
+            var errorMessage = ""
+            for code in errorCodeArray {
+                errorMessage = errorMessage + ErrorCodeDictionary.getErrorMessageByErrorCode(errorCode: code)
+            }
+            let dialogBox = UIAlertController(title: "😱 Error 😱", message: errorMessage, preferredStyle: .alert)
+            dialogBox.addAction(UIAlertAction(title: "Let me check again 😒", style: UIAlertActionStyle.default, handler: nil))
+            
+            present(dialogBox, animated: true, completion: {
+                self.errorCodeArray.removeAll()
+            })
+        }
+    }
+
 }
