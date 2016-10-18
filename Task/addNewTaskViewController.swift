@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import UserNotifications
 
 protocol TaskConfigurationDelegate {
-    func userDidSetNewTask(input: String)
+    func userDidSetNewTask()
 }
 
 class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
@@ -48,25 +49,12 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         modifySomeUISettings()
         applyGestureRecognizers()
         configureDatePicker()
-        
-    }
-    
-    @IBAction func submitBtnPressed(_ sender: UIButton) {
-        
-        if delegate != nil && inputTextField.text != nil && inputTextField.text != "" {
-            if let data = inputTextField.text {
-                delegate?.userDidSetNewTask(input: data)
-                dismiss(animated: true, completion: nil)
-            }
-        }
-        
     }
 
     //Dismiss current viewController when Cancel Navigation Bar Button is pressed
     @IBAction func CancelPressed(_ sender: AnyObject) {
         
         dismiss(animated: true, completion: nil)
-        
     }
     
     //Dismiss textField keyboard when return is pressed
@@ -74,7 +62,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         
         inputTextField.resignFirstResponder()
         return false
-        
     }
     
     //Replace existing text in textView with empty upon editing
@@ -114,7 +101,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         reminderFrequencyBtn.titleLabel?.minimumScaleFactor = 0.75
         taskTypeBtn.titleLabel?.minimumScaleFactor = 0.75
         submitBtn.titleLabel?.minimumScaleFactor = 0.75
-        
     }
     
     //set up gesture recognizers
@@ -126,7 +112,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         taskTypeBtn.addGestureRecognizer(longPressRecognizerForTaskType)
         reminderFrequencyBtn.addGestureRecognizer(longPressRecognizerForReminderFrequency)
         submitBtn.addGestureRecognizer(tapRecognizerForSubmitBtn)
-        
     }
     
     //Gesture Handler for task type btn
@@ -151,7 +136,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
             newTaskType = selectedOption
             taskTypeBtn.setTitle(selectedOption, for: .normal)
         }
-        
     }
     
     //Gesture Handler for reminder frequency button
@@ -176,15 +160,13 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
             newTaskReminderFrequency = selectedFrequency
             reminderFrequencyBtn.setTitle(selectedFrequency, for: .normal)
         }
-        
     }
     
     //Gesture Handler for submit button
     func submitBtnGestureHandler(sender: UITapGestureRecognizer) {
         
         if(validateNewTaskInputs()) {
-            let newTask = CustomTask(newTaskName: newTaskName!, newTaskDetails: newTaskDescription, newTaskType: newTaskType!, newTaskReminderFrequency: newTaskReminderFrequency!, newTaskDueDate: newTaskDueDate!)
-            
+            checkLocalNotificationSetting()
         }
     }
     
@@ -237,7 +219,7 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         
         datePicker.datePickerMode = .date
         datePicker.setDate(Date(timeIntervalSinceNow: 10), animated: false)
-        datePicker.minimumDate = NSDate(timeIntervalSinceNow: 0) as Date
+        datePicker.minimumDate = NSDate(timeIntervalSinceNow: 86400) as Date
         datePicker.maximumDate = NSDate(timeIntervalSinceNow: 31556926 * 3) as Date
         datePicker.addTarget(self, action: #selector(parseDate), for: .valueChanged)
         
@@ -284,5 +266,48 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
             })
         }
     }
-
+    
+    //Check if local notification is enabled, if not set, prompt user, if declined, return false
+    func checkLocalNotificationSetting() {
+        
+        let userSetting = UNUserNotificationCenter.current()
+        
+        userSetting.getNotificationSettings { (UNNotificationSettings) in
+            if UNNotificationSettings.authorizationStatus == .notDetermined {
+                userSetting.requestAuthorization(options: [.alert, .badge, .sound], completionHandler: { (status, Error) in
+                    if !status {
+                        self.localNotificationNoPermissionAlert()
+                    } else {
+                        self.consolidateNewInfoTask()
+                    }
+                })
+            }
+            
+            if UNNotificationSettings.authorizationStatus == .denied {
+                self.localNotificationNoPermissionAlert()
+            }
+            
+            if UNNotificationSettings.authorizationStatus == .authorized {
+                self.consolidateNewInfoTask()
+            }
+        }
+    }
+    
+    //present a dialog to user that local notification doesn't have permission
+    func localNotificationNoPermissionAlert() {
+        let noPermission = UIAlertController(title: "Something is wrong", message: "Well, can't remind you if I don't have the permission 😤", preferredStyle: .alert)
+        noPermission.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(noPermission, animated: true, completion: nil)
+    }
+    
+    //store the task info into an object and schedule the local notification
+    func consolidateNewInfoTask() {
+        
+        let newTask = CustomTask(newTaskName: newTaskName!, newTaskDetails: newTaskDescription, newTaskType: newTaskType!, newTaskReminderFrequency: newTaskReminderFrequency!, newTaskDueDate: newTaskDueDate!)
+        newTask.scheduleLocalNotifications()
+        
+        //reminders are set, return to main screen
+        delegate?.userDidSetNewTask()
+        dismiss(animated: true, completion: nil)
+    }
 }

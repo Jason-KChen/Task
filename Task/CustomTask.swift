@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UserNotifications
 
 class CustomTask {
     
@@ -17,6 +18,12 @@ class CustomTask {
     private var _dueDateYear: Int!
     private var _dueDateMonth: Int!
     private var _dueDateDay: Int!
+    private var _notificationIdentifiers: [String] = []
+    private var _frequencyConstant: Int!
+    
+//    var currentYear: Int?
+//    var currentMonth: Int?
+//    var currentDay: Int?
     
     init(newTaskName:String, newTaskDetails:String?, newTaskType: String, newTaskReminderFrequency: String, newTaskDueDate: [Int]) {
         
@@ -30,5 +37,93 @@ class CustomTask {
         if let additionalDetails = newTaskDetails {
             _taskDetails = additionalDetails
         }
+        
+        switch newTaskReminderFrequency {
+            case "Everyday":
+                _frequencyConstant = 1
+                break
+            case "Every Three Days":
+                _frequencyConstant = 3
+                break
+            case "Every Week":
+                _frequencyConstant = 7
+                break
+            default:
+                _frequencyConstant = 0
+                break
+        }
     }
+    
+    func scheduleLocalNotifications() {
+        
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Task Reminder ⏰"
+        
+        if let taskName = _taskName, let year = _dueDateYear, let month = _dueDateMonth, let day = _dueDateDay {
+            content.body = "\(taskName) on \(month).\(day).\(year)"
+        } else {
+            content.body = ""
+        }
+        
+        content.categoryIdentifier = "Task Reminder"
+        content.sound = UNNotificationSound.default()
+        
+        var calendarTrigger: UNCalendarNotificationTrigger
+        var request: UNNotificationRequest
+        var dayDiff = calculateRemainingDays()
+        let unitFlagsA = Set<Calendar.Component>([.year, .month, .day, .hour])
+        var date = Date()
+        var dateComponent = NSCalendar.current.dateComponents(unitFlagsA, from: date)
+        date = Calendar.current.date(bySetting: .hour, value: 5, of: date)!
+        
+        while dayDiff > _frequencyConstant {
+            date = Calendar.current.date(byAdding: .day, value: _frequencyConstant, to: date)!
+            dateComponent = Calendar.current.dateComponents(unitFlagsA, from: date)
+            calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+            request = UNNotificationRequest(identifier: _taskName, content: content, trigger: calendarTrigger)
+            center.add(request)
+            print("Adding a local notification on \(dateComponent.month!).\(dateComponent.day!).\(dateComponent.year!) at \(dateComponent.hour!)")
+            dayDiff = dayDiff - _frequencyConstant
+        }
+        
+        dateComponent.year = _dueDateYear
+        dateComponent.day = _dueDateDay
+        dateComponent.month = _dueDateMonth
+        dateComponent.hour = 5
+        calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
+        request = UNNotificationRequest(identifier: _taskName, content: content, trigger: calendarTrigger)
+        center.add(request)
+        print("Adding a local notification on \(dateComponent.month!).\(dateComponent.day!).\(dateComponent.year!) at \(dateComponent.hour!)")
+        
+        print("Finish adding local notifications")
+        
+        
+            
+        //remove remaining notifications once task is deleted
+        //give each notification an unique id
+        //double check this method for corner cases
+    }
+    
+    //returns the differences in days between current date and task due date
+    func calculateRemainingDays() -> Int {
+        
+        var targetDayDC = DateComponents()
+        targetDayDC.year = _dueDateYear
+        targetDayDC.month = _dueDateMonth
+        targetDayDC.day = _dueDateDay
+        
+        let targetDate = NSCalendar.current.date(from: targetDayDC)
+        let unitFlags = Set<Calendar.Component>([.day, .hour])
+        var days = NSCalendar.current.dateComponents(unitFlags, from: Date(), to: targetDate!)
+        
+        if let dayDiff = days.day {
+            return dayDiff
+        } else {
+            return 1
+        }
+    }
+    
+    
 }

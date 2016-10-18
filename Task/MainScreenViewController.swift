@@ -61,13 +61,13 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddNewTask" {
-            if let nextVCb = segue.destination as? addNewTaskViewController {
-                nextVCb.delegate = self
+            if let nextVC = segue.destination as? addNewTaskViewController {
+                nextVC.delegate = self
             }
         }
     }
     
-    func userDidSetNewTask(input: String) {
-        print(input)
+    func userDidSetNewTask() {
+        print("Hello")
     }
 }
