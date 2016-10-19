@@ -19,16 +19,67 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLl-0n-wgC">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="71" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RLl-0n-wgC">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Task" id="lfz-21-JZz">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Task" rowHeight="71" id="lfz-21-JZz" customClass="TaskCell" customModule="Task" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="71"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lfz-21-JZz" id="qZ2-MD-UHg">
-                                            <frame key="frameInset" width="375" height="43.5"/>
+                                            <frame key="frameInset" width="375" height="71"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H8M-Ty-hFy">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="54" id="8sT-Q1-Blz"/>
+                                                        <constraint firstAttribute="height" constant="54" id="rrg-0h-Yf2"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="Tjo-gg-iWW">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="31" id="oUG-al-pgj"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XtG-Zo-uvC">
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="77" id="VeC-UW-XCO"/>
+                                                        <constraint firstAttribute="height" constant="48" id="rWl-hb-uUP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="fVL-dR-N0b">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="17" id="EuQ-xG-NKf"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="XtG-Zo-uvC" firstAttribute="top" secondItem="qZ2-MD-UHg" secondAttribute="topMargin" id="0Vm-eE-Yym"/>
+                                                <constraint firstItem="XtG-Zo-uvC" firstAttribute="leading" secondItem="fVL-dR-N0b" secondAttribute="trailing" constant="18" id="5ck-jt-b11"/>
+                                                <constraint firstItem="XtG-Zo-uvC" firstAttribute="leading" secondItem="Tjo-gg-iWW" secondAttribute="trailing" constant="23" id="P3n-z0-nMt"/>
+                                                <constraint firstItem="Tjo-gg-iWW" firstAttribute="top" secondItem="qZ2-MD-UHg" secondAttribute="topMargin" id="bgo-Fl-ft6"/>
+                                                <constraint firstItem="H8M-Ty-hFy" firstAttribute="leading" secondItem="qZ2-MD-UHg" secondAttribute="leadingMargin" id="fpB-BL-W45"/>
+                                                <constraint firstItem="XtG-Zo-uvC" firstAttribute="trailing" secondItem="qZ2-MD-UHg" secondAttribute="trailingMargin" id="jC5-c0-VNz"/>
+                                                <constraint firstItem="H8M-Ty-hFy" firstAttribute="top" secondItem="qZ2-MD-UHg" secondAttribute="topMargin" id="kCt-nv-ebj"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="fVL-dR-N0b" secondAttribute="bottom" constant="5" id="lLz-Ps-Kyd"/>
+                                                <constraint firstItem="Tjo-gg-iWW" firstAttribute="leading" secondItem="H8M-Ty-hFy" secondAttribute="trailing" constant="4" id="n8q-RI-zcv"/>
+                                                <constraint firstItem="fVL-dR-N0b" firstAttribute="leading" secondItem="H8M-Ty-hFy" secondAttribute="trailing" constant="4" id="ukC-kl-AFL"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="remainingDaysLabel" destination="XtG-Zo-uvC" id="f2g-CU-UmX"/>
+                                            <outlet property="taskDetails" destination="fVL-dR-N0b" id="t8j-Ua-1uQ"/>
+                                            <outlet property="taskTitle" destination="Tjo-gg-iWW" id="dlg-kd-Mc9"/>
+                                            <outlet property="taskTypeImage" destination="H8M-Ty-hFy" id="Jp5-Bd-IBu"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B22A9041DB7FCAE008025FE /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B22A9031DB7FCAD008025FE /* TaskCell.swift */; };
 		4B43DE881DAF50A400B5891E /* newTaskPageButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43DE871DAF50A400B5891E /* newTaskPageButtons.swift */; };
 		4B43DE8A1DB0295600B5891E /* roundCornerDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43DE891DB0295600B5891E /* roundCornerDatePicker.swift */; };
 		4B43DE8C1DB057E300B5891E /* RoundTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B43DE8B1DB057E300B5891E /* RoundTextView.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B22A9031DB7FCAD008025FE /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		4B43DE871DAF50A400B5891E /* newTaskPageButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = newTaskPageButtons.swift; sourceTree = "<group>"; };
 		4B43DE891DB0295600B5891E /* roundCornerDatePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = roundCornerDatePicker.swift; sourceTree = "<group>"; };
 		4B43DE8B1DB057E300B5891E /* RoundTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundTextView.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				4BD78F3C1DAC9CFD00D6D873 /* LaunchScreen.storyboard */,
 				4B43DE891DB0295600B5891E /* roundCornerDatePicker.swift */,
 				4B43DE8B1DB057E300B5891E /* RoundTextView.swift */,
+				4B22A9031DB7FCAD008025FE /* TaskCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				4B43DE8C1DB057E300B5891E /* RoundTextView.swift in Sources */,
 				4BD78F341DAC9CFD00D6D873 /* AppDelegate.swift in Sources */,
 				4BD78F4A1DACA10D00D6D873 /* MainScreenViewController.swift in Sources */,
+				4B22A9041DB7FCAE008025FE /* TaskCell.swift in Sources */,
 				4B43DE881DAF50A400B5891E /* newTaskPageButtons.swift in Sources */,
 				4B94B4DF1DAEC29E0035BCE8 /* AboutPageViewController.swift in Sources */,
 				4B69E6181DB45884000D3901 /* ErrorCodeDictionary.swift in Sources */,

@@ -185,7 +185,7 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         }
         
         //verify additional details regarding the task
-        if let taskDetails = additionalDetails.text {
+        if let taskDetails = newTaskDescription {
             if taskDetails.characters.count > 0 {
                 newTaskDescription = taskDetails
             }
@@ -310,7 +310,6 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         } else {
             print("[Task] User chose to have no reminders")
         }
-        
         
         //reminders are set, return to main screen
         delegate?.userDidSetNewTask(newCustomTask: newTask)

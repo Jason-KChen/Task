@@ -121,7 +121,7 @@ class CustomTask {
         var dateComponent = NSCalendar.current.dateComponents(unitFlags, from: date)
         date = Calendar.current.date(bySetting: .hour, value: 5, of: date)!
         
-        while dayDiff > _frequencyConstant {
+        while dayDiff >= _frequencyConstant {
             date = Calendar.current.date(byAdding: .day, value: _frequencyConstant, to: date)!
             dateComponent = Calendar.current.dateComponents(unitFlags, from: date)
             calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
@@ -159,10 +159,6 @@ class CustomTask {
         let unitFlags = Set<Calendar.Component>([.day, .hour])
         var days = NSCalendar.current.dateComponents(unitFlags, from: Date(), to: targetDate!)
         
-        if let dayDiff = days.day {
-            return dayDiff
-        } else {
-            return 1
-        }
+        return days.day!
     }
 }

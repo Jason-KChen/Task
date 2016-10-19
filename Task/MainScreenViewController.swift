@@ -22,7 +22,7 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         tableView.dataSource = self
         setupNavigationBarBtns()
-        debugAndReseting()
+        //debugAndReseting()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +46,13 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     
     //perform segue to about page
     func goToAboutPage() {
+        
         performSegue(withIdentifier: "goToAbout", sender: nil)
     }
     
     //perform segue to add a new task page
     func goToAddANewTaskPage() {
+        
         performSegue(withIdentifier: "AddNewTask", sender: nil)
     }
     
@@ -60,11 +62,20 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task")
-        let task = userCustomTasks[indexPath.row]
-        dequeued?.textLabel?.text = task.taskName! + " " + task.taskDueDate!.description
+        let currentTask = userCustomTasks[indexPath.row]
         
-        return dequeued!
+        if let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task") as? TaskCell {
+            
+            if let taskDetails = currentTask.taskDetails {
+                dequeued.constructNewTaskCellContent(taskName: currentTask.taskName!, details: taskDetails, taskType: currentTask.taskType!, taskDueDate: currentTask.taskDueDate! as Date)
+            } else {
+                dequeued.constructNewTaskCellContent(taskName: currentTask.taskName!, details: nil, taskType: currentTask.taskType!, taskDueDate: currentTask.taskDueDate! as Date)
+            }
+            
+            return dequeued
+        } else {
+            return TaskCell()
+        }
     }
     
     //segue transition function for conforming the next view to the protocol
@@ -83,12 +94,11 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         return appDelegate.persistentContainer.viewContext
     }
     
+    //implementing protocol function
     func userDidSetNewTask(newCustomTask newTask: CustomTask) {
         
         let context = getContext()
-        
         let entity = NSEntityDescription.entity(forEntityName: "UserCustomTask", in: context)
-        
         let customT = NSManagedObject(entity: entity!, insertInto: context)
         
         customT.setValue(newTask.name, forKey: "taskName")
@@ -126,7 +136,7 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     func debugAndReseting() {
         
         removeAllPendingNotifications()
-        //resetUserCustomTaskInCoreData()
+        resetUserCustomTaskInCoreData()
     }
     
     //remove all pending notifications scheduled in the phone
