@@ -8,8 +8,11 @@
 
 import UIKit
 import CoreData
+import UserNotifications
 
 class MainScreenViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskConfigurationDelegate {
+    
+    var userCustomTasks: [UserCustomTask] = []
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var tableView: UITableView!
@@ -19,6 +22,13 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         tableView.delegate = self
         tableView.dataSource = self
         setupNavigationBarBtns()
+        debugAndReseting()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+    
+        fetchDataFromCoreData()
+        tableView.reloadData()
     }
     
     //add title, left button and right button for navigation bar
@@ -45,21 +55,19 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return userCustomTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task")
         
-        if indexPath.row == 0 {
-            dequeued!.textLabel?.text = "Hello World"
-        }
-        if indexPath.row == 1 {
-            dequeued!.textLabel?.text = "Goodbye World"
-        }
+        let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task")
+        let task = userCustomTasks[indexPath.row]
+        dequeued?.textLabel?.text = task.taskName! + " " + task.taskDueDate!.description
+        
         return dequeued!
     }
     
+    //segue transition function for conforming the next view to the protocol
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "AddNewTask" {
             if let nextVC = segue.destination as? addNewTaskViewController {
@@ -68,13 +76,79 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    func getContext() -> NSManagedObject {
+    //returns the context of the app for fetching data
+    func getContext() -> NSManagedObjectContext {
+        
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }
     
-    func userDidSetNewTask() {
-
-        print("Hello")
+    func userDidSetNewTask(newCustomTask newTask: CustomTask) {
+        
+        let context = getContext()
+        
+        let entity = NSEntityDescription.entity(forEntityName: "UserCustomTask", in: context)
+        
+        let customT = NSManagedObject(entity: entity!, insertInto: context)
+        
+        customT.setValue(newTask.name, forKey: "taskName")
+        customT.setValue(newTask.type, forKey: "taskType")
+        customT.setValue(newTask.dueDate, forKey: "taskDueDate")
+        
+        if let detailInfo = newTask.details {
+            customT.setValue(detailInfo, forKey: "taskDetails")
+        }
+        
+        do {
+            try context.save()
+            print("[Task] \(newTask.name) is saved")
+        } catch {
+            print(error)
+        }
+    }
+    
+    //fetch the data from core data and and assign the list to userCustomTasks
+    func fetchDataFromCoreData() {
+        
+        let fetchRequest: NSFetchRequest<UserCustomTask> = UserCustomTask.fetchRequest()
+        let sortDescriptor: NSSortDescriptor = NSSortDescriptor(key: "taskDueDate", ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+        
+        do {
+            userCustomTasks = try getContext().fetch(fetchRequest)
+            print("[Task] CoreData has \(userCustomTasks.count) elements")
+        } catch {
+            print(error)
+        }
+    }
+    
+    //function for starting, reset data in core data, remove all pending notification
+    func debugAndReseting() {
+        
+        removeAllPendingNotifications()
+        //resetUserCustomTaskInCoreData()
+    }
+    
+    //remove all pending notifications scheduled in the phone
+    func removeAllPendingNotifications() {
+        
+        let center = UNUserNotificationCenter.current()
+        center.removeAllPendingNotificationRequests()
+    }
+    
+    //reset coredata information under UserCustomTask
+    func resetUserCustomTaskInCoreData() {
+        
+        let fetchRequest: NSFetchRequest<UserCustomTask> = UserCustomTask.fetchRequest()
+        var arrayForDeletion: [UserCustomTask] = []
+        do {
+            arrayForDeletion = try getContext().fetch(fetchRequest)
+        } catch {
+            print("[Task] Try to set array for deletion failed \(error)")
+        }
+        
+        for task in arrayForDeletion {
+            getContext().delete(task)
+        }
     }
 }

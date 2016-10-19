@@ -20,10 +20,46 @@ class CustomTask {
     private var _dueDateDay: Int!
     private var _notificationIdentifiers: [String] = []
     private var _frequencyConstant: Int!
+    private var _dueDate: Date!
     
-//    var currentYear: Int?
-//    var currentMonth: Int?
-//    var currentDay: Int?
+    var name: String {
+        get {
+            return _taskName
+        }
+    }
+    
+    var details: String? {
+        get {
+            if let info = _taskDetails {
+                return info
+            }
+            return nil
+        }
+    }
+    
+    var type: String {
+        get {
+            return _taskType
+        }
+    }
+    
+    var frequency: String {
+        get {
+            return _reminderFrequency
+        }
+    }
+    
+    var arrayOfIdentifiers: [String] {
+        get {
+            return _notificationIdentifiers
+        }
+    }
+    
+    var dueDate: Date {
+        get {
+            return _dueDate
+        }
+    }
     
     init(newTaskName:String, newTaskDetails:String?, newTaskType: String, newTaskReminderFrequency: String, newTaskDueDate: [Int]) {
         
@@ -52,6 +88,13 @@ class CustomTask {
                 _frequencyConstant = 0
                 break
         }
+        
+        var dueDateComponent = DateComponents()
+        dueDateComponent.year = _dueDateYear
+        dueDateComponent.month = _dueDateMonth
+        dueDateComponent.day = _dueDateDay
+        
+        _dueDate = Calendar.current.date(from: dueDateComponent)
     }
     
     func scheduleLocalNotifications() {
@@ -73,18 +116,18 @@ class CustomTask {
         var calendarTrigger: UNCalendarNotificationTrigger
         var request: UNNotificationRequest
         var dayDiff = calculateRemainingDays()
-        let unitFlagsA = Set<Calendar.Component>([.year, .month, .day, .hour])
+        let unitFlags = Set<Calendar.Component>([.year, .month, .day, .hour])
         var date = Date()
-        var dateComponent = NSCalendar.current.dateComponents(unitFlagsA, from: date)
+        var dateComponent = NSCalendar.current.dateComponents(unitFlags, from: date)
         date = Calendar.current.date(bySetting: .hour, value: 5, of: date)!
         
         while dayDiff > _frequencyConstant {
             date = Calendar.current.date(byAdding: .day, value: _frequencyConstant, to: date)!
-            dateComponent = Calendar.current.dateComponents(unitFlagsA, from: date)
+            dateComponent = Calendar.current.dateComponents(unitFlags, from: date)
             calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
             request = UNNotificationRequest(identifier: _taskName, content: content, trigger: calendarTrigger)
             center.add(request)
-            print("Adding a local notification on \(dateComponent.month!).\(dateComponent.day!).\(dateComponent.year!) at \(dateComponent.hour!)")
+            print("[Task] Adding a local notification on \(dateComponent.month!).\(dateComponent.day!).\(dateComponent.year!) at \(dateComponent.hour!)")
             dayDiff = dayDiff - _frequencyConstant
         }
         
@@ -95,11 +138,9 @@ class CustomTask {
         calendarTrigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: false)
         request = UNNotificationRequest(identifier: _taskName, content: content, trigger: calendarTrigger)
         center.add(request)
-        print("Adding a local notification on \(dateComponent.month!).\(dateComponent.day!).\(dateComponent.year!) at \(dateComponent.hour!)")
+        print("[Task] Adding a local notification on \(dateComponent.month!).\(dateComponent.day!).\(dateComponent.year!) at \(dateComponent.hour!)")
         
-        print("Finish adding local notifications")
-        
-        
+        print("[Task] Finish adding local notifications")
             
         //remove remaining notifications once task is deleted
         //give each notification an unique id
@@ -124,6 +165,4 @@ class CustomTask {
             return 1
         }
     }
-    
-    
 }

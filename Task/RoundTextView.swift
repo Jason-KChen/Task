@@ -11,8 +11,8 @@ import UIKit
 class RoundTextView: UITextView {
 
     override func awakeFromNib() {
+        
         layer.cornerRadius = 30
         clipsToBounds = true
     }
-    
 }

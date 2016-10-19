@@ -10,10 +10,8 @@ import UIKit
 
 class roundCornerDatePicker: UIDatePicker {
 
-//    var localTime: String {
-//        return descriptionWithLocal
-//    }
     override func awakeFromNib() {
+        
         layer.cornerRadius = 30
         clipsToBounds = true
     }

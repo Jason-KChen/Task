@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 protocol TaskConfigurationDelegate {
-    func userDidSetNewTask()
+    func userDidSetNewTask(newCustomTask: CustomTask)
 }
 
 class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
@@ -304,10 +304,16 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
     func consolidateNewInfoTask() {
         
         let newTask = CustomTask(newTaskName: newTaskName!, newTaskDetails: newTaskDescription, newTaskType: newTaskType!, newTaskReminderFrequency: newTaskReminderFrequency!, newTaskDueDate: newTaskDueDate!)
-        newTask.scheduleLocalNotifications()
+        
+        if newTask.frequency != "No Reminder" {
+            newTask.scheduleLocalNotifications()
+        } else {
+            print("[Task] User chose to have no reminders")
+        }
+        
         
         //reminders are set, return to main screen
-        delegate?.userDidSetNewTask()
+        delegate?.userDidSetNewTask(newCustomTask: newTask)
         dismiss(animated: true, completion: nil)
     }
 }
