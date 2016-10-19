@@ -13,7 +13,7 @@
 		4B69E6181DB45884000D3901 /* ErrorCodeDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B69E6171DB45884000D3901 /* ErrorCodeDictionary.swift */; };
 		4B69E61A1DB4629F000D3901 /* CustomTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B69E6191DB4629F000D3901 /* CustomTask.swift */; };
 		4B69E61D1DB5EA4D000D3901 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B69E61C1DB5EA4D000D3901 /* CoreData.framework */; };
-		4B69E6211DB5EA96000D3901 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B69E61F1DB5EA96000D3901 /* CoreData.xcdatamodeld */; };
+		4B69E6211DB5EA96000D3901 /* Task.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4B69E61F1DB5EA96000D3901 /* Task.xcdatamodeld */; };
 		4B94B4DD1DAD81D80035BCE8 /* addNewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94B4DC1DAD81D80035BCE8 /* addNewTaskViewController.swift */; };
 		4B94B4DF1DAEC29E0035BCE8 /* AboutPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B94B4DE1DAEC29E0035BCE8 /* AboutPageViewController.swift */; };
 		4BD78F341DAC9CFD00D6D873 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BD78F331DAC9CFD00D6D873 /* AppDelegate.swift */; };
@@ -30,7 +30,7 @@
 		4B69E6171DB45884000D3901 /* ErrorCodeDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorCodeDictionary.swift; sourceTree = "<group>"; };
 		4B69E6191DB4629F000D3901 /* CustomTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTask.swift; sourceTree = "<group>"; };
 		4B69E61C1DB5EA4D000D3901 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		4B69E6201DB5EA96000D3901 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
+		4B69E6201DB5EA96000D3901 /* Task.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Task.xcdatamodel; sourceTree = "<group>"; };
 		4B94B4DC1DAD81D80035BCE8 /* addNewTaskViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addNewTaskViewController.swift; sourceTree = "<group>"; };
 		4B94B4DE1DAEC29E0035BCE8 /* AboutPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutPageViewController.swift; sourceTree = "<group>"; };
 		4BD78F301DAC9CFD00D6D873 /* Task.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Task.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +88,7 @@
 				4BD78F331DAC9CFD00D6D873 /* AppDelegate.swift */,
 				4BD78F3A1DAC9CFD00D6D873 /* Assets.xcassets */,
 				4BD78F3F1DAC9CFD00D6D873 /* Info.plist */,
-				4B69E61F1DB5EA96000D3901 /* CoreData.xcdatamodeld */,
+				4B69E61F1DB5EA96000D3901 /* Task.xcdatamodeld */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -199,7 +199,7 @@
 			files = (
 				4B69E61A1DB4629F000D3901 /* CustomTask.swift in Sources */,
 				4B94B4DD1DAD81D80035BCE8 /* addNewTaskViewController.swift in Sources */,
-				4B69E6211DB5EA96000D3901 /* CoreData.xcdatamodeld in Sources */,
+				4B69E6211DB5EA96000D3901 /* Task.xcdatamodeld in Sources */,
 				4B43DE8A1DB0295600B5891E /* roundCornerDatePicker.swift in Sources */,
 				4B43DE8C1DB057E300B5891E /* RoundTextView.swift in Sources */,
 				4BD78F341DAC9CFD00D6D873 /* AppDelegate.swift in Sources */,
@@ -375,13 +375,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		4B69E61F1DB5EA96000D3901 /* CoreData.xcdatamodeld */ = {
+		4B69E61F1DB5EA96000D3901 /* Task.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				4B69E6201DB5EA96000D3901 /* CoreData.xcdatamodel */,
+				4B69E6201DB5EA96000D3901 /* Task.xcdatamodel */,
 			);
-			currentVersion = 4B69E6201DB5EA96000D3901 /* CoreData.xcdatamodel */;
-			path = CoreData.xcdatamodeld;
+			currentVersion = 4B69E6201DB5EA96000D3901 /* Task.xcdatamodel */;
+			path = Task.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

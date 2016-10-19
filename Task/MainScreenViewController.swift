@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainScreenViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, TaskConfigurationDelegate {
     
@@ -44,19 +45,19 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task", for: indexPath)
+        let dequeued = tableView.dequeueReusableCell(withIdentifier: "Task")
         
         if indexPath.row == 0 {
-            dequeued.textLabel?.text = "Hello World"
+            dequeued!.textLabel?.text = "Hello World"
         }
         if indexPath.row == 1 {
-            dequeued.textLabel?.text = "Goodbye World"
+            dequeued!.textLabel?.text = "Goodbye World"
         }
-        return dequeued
+        return dequeued!
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,7 +68,13 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
+    func getContext() -> NSManagedObject {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
     func userDidSetNewTask() {
+
         print("Hello")
     }
 }
