@@ -1,5 +1,5 @@
 # Task
-- A simple task managing app built with Core Data
+- A simple task managing app built with Core Data and UserNotification
 ---
 ### Todo
 - add license
