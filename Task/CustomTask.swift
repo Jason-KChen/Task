@@ -142,7 +142,6 @@ class CustomTask {
         
         print("[Task] Finish adding local notifications")
             
-        //remove remaining notifications once task is deleted
         //give each notification an unique id
         //double check this method for corner cases
     }

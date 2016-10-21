@@ -15,6 +15,7 @@ protocol TaskConfigurationDelegate {
 
 class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFieldDelegate {
 
+    @IBOutlet weak var datePickerSwitch: UISwitch!
     @IBOutlet weak var taskNameLabel: UILabel!
     @IBOutlet weak var taskDetailsLabel: UILabel!
     @IBOutlet weak var inputTextField: UITextField!
@@ -49,6 +50,9 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         modifySomeUISettings()
         applyGestureRecognizers()
         configureDatePicker()
+        datePickerSwitch.setOn(true, animated: false)
+        datePicker.isUserInteractionEnabled = false
+        datePicker.alpha = 0.4
     }
 
     //Dismiss current viewController when Cancel Navigation Bar Button is pressed
@@ -314,5 +318,19 @@ class addNewTaskViewController: UIViewController, UITextViewDelegate, UITextFiel
         //reminders are set, return to main screen
         delegate?.userDidSetNewTask(newCustomTask: newTask)
         dismiss(animated: true, completion: nil)
+    }
+    
+    //IBAction that controls the state of the date picker switch and locks date picker accordingly
+    @IBAction func datePickerSwitchPressed(_ sender: UISwitch) {
+        
+        if sender.isOn {
+            print("[Task] date picker switch is on")
+            datePicker.isUserInteractionEnabled = false
+            datePicker.alpha = 0.4
+        } else {
+            print("[Task] date picker switch is off")
+            datePicker.isUserInteractionEnabled = true
+            datePicker.alpha = 0.9
+        }
     }
 }

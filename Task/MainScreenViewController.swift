@@ -104,6 +104,8 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         customT.setValue(newTask.name, forKey: "taskName")
         customT.setValue(newTask.type, forKey: "taskType")
         customT.setValue(newTask.dueDate, forKey: "taskDueDate")
+        customT.setValue(newTask.frequency, forKey: "taskFrequency")
+        customT.setValue(newTask.type, forKey: "taskType")
         
         if let detailInfo = newTask.details {
             customT.setValue(detailInfo, forKey: "taskDetails")
@@ -139,6 +141,23 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         resetUserCustomTaskInCoreData()
     }
     
+    //function which enables the user to delete a task and all of its local notifications in the future
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let center = UNUserNotificationCenter.current()
+            let appDel: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            let taskToBeDeleted = userCustomTasks[indexPath.row]
+            
+            center.removePendingNotificationRequests(withIdentifiers: [taskToBeDeleted.taskName!])
+            getContext().delete(taskToBeDeleted)
+            appDel.saveContext()
+
+            fetchDataFromCoreData()
+            tableView.reloadData()
+        }
+    }
+    
     //remove all pending notifications scheduled in the phone
     func removeAllPendingNotifications() {
         
@@ -158,7 +177,55 @@ class MainScreenViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         for task in arrayForDeletion {
+            let appDel: AppDelegate = UIApplication.shared.delegate as! AppDelegate
             getContext().delete(task)
+            appDel.saveContext()
         }
+    }
+    
+    //function that allows the user to view the details of a task on click
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let selectedTask = userCustomTasks[indexPath.row]
+        showDetailsOfACustomTask(selectedTask: selectedTask)
+        
+    }
+    
+    //function that generates a alert view with basic information about a given custom task
+    func showDetailsOfACustomTask(selectedTask: UserCustomTask) {
+        
+        let taskDetailsAlertView = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        taskDetailsAlertView.title = selectedTask.taskName
+        
+        let dateParsingFlags = Set<Calendar.Component>([.year, .day, .month])
+        let parsedDateComponent = Calendar.current.dateComponents(dateParsingFlags, from: selectedTask.taskDueDate! as Date)
+        
+        var taskDetails = "Info: Not Available\n"
+        var taskDueDate = "Due Date:"
+        var taskType = "Type: ERROR\n"
+        var reminderFreq = "Reminders: ERROR\n"
+        
+        if let year = parsedDateComponent.year, let month = parsedDateComponent.month, let day = parsedDateComponent.day {
+            taskDueDate = taskDueDate + " \(month).\(day).\(year)\n"
+        } else {
+            taskDueDate = taskDueDate + " ERROR\n"
+        }
+        
+        if let moreInfo = selectedTask.taskDetails {
+            taskDetails = "Info: \(moreInfo)\n"
+        }
+        
+        if let type = selectedTask.taskType {
+            taskType = "Type: \(type)\n"
+        }
+        
+        if let freq = selectedTask.taskFrequency {
+            reminderFreq = "Reminders: \(freq)\n"
+        }
+        
+        taskDetailsAlertView.message = taskType + taskDetails + taskDueDate + reminderFreq
+        taskDetailsAlertView.addAction(UIAlertAction(title: "👀", style: .default, handler: nil))
+        
+        show(taskDetailsAlertView, sender: nil)
     }
 }

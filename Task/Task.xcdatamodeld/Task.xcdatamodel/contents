@@ -6,7 +6,7 @@
         <attribute name="taskDDY" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="taskDetails" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskDueDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="taskFreuency" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taskFrequency" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="taskUNIdentifiers" optional="YES" attributeType="Transformable" syncable="YES"/>
