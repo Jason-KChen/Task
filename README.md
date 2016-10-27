@@ -1,11 +1,11 @@
 # Task
 ### A simple task managing app built with Core Data and UserNotification
 ### Screenshot
-***Main View***
-![](Screenshots/mainView.png)
-***Add A Task***
-![](Screenshots/addTaskView1.png)
-![](Screenshots/addTaskView2.png)
+***Main View***  
+![](Screenshots/mainView.png)  
+***Add A Task***  
+![](Screenshots/addTaskView1.png)  
+![](Screenshots/addTaskView2.png)  
 ### Some Gifs
 - #### Main View Navigation
 - ![](Screenshots/mainNavigationGIF.gif)
