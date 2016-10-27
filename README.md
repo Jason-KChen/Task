@@ -2,7 +2,7 @@
 ### A simple task managing app built with Core Data and UserNotification
 ### Screenshot
 ***Main View***  
-![](Screenshots/mainView.png)  
+![](Screenshots/mainView.png =100x300)  
 ***Add A Task***  
 ![](Screenshots/addTaskView1.png)  
 ![](Screenshots/addTaskView2.png)  
